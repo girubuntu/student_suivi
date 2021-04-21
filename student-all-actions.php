@@ -346,7 +346,7 @@ if (isset($_POST['submit'])) {
                               <?php } ?>
 
                               <div class="col-md-12">
-                                    <table id="example" class="table table-bordered" style="width:100%; background:#46BEDB">
+                                    <table id="example" class="table table-bordered" style="width:100%; background:#F4F4F4">
                                         <thead>
                                             <tr>
                                                 <th>Permission</th>
@@ -483,7 +483,7 @@ if (isset($_POST['submit'])) {
                                 </div>
                             <?php } ?>
                                 <div class="col-md-12">
-                                    <table id="example" class="table table-bordered" style="width:100%; background:#59BB4C">
+                                    <table id="example" class="table table-bordered" style="width:100%; background:#CCC">
                                         <thead>
                                             <tr>
                                                 <th>No</th>
