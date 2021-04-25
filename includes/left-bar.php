@@ -104,10 +104,24 @@
                         <?php } ?> 
                         <?php if($role == 'parent' || $role == 'student'){ ?>
                         <li class="sidebar-menu-item"> 
+
+                            <?php if($role == 'parent'){
+                                $queryStudent = "SELECT * FROM student WHERE parent_id = '$user_user_id' AND deleted != 'yes'";
+                                $queryStudent = $conn->query($queryStudent);
+                                $rowStudent = $queryStudent->fetch_assoc(); 
+                                $studentId =  $rowStudent['id'];
+                                ?>
+                                <a class="sidebar-menu-button" href="student-all-actions.php?student-id=<?php echo $studentId; ?>">
+                                <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">star_half</i>
+                                <span class="sidebar-menu-text">Student</span>
+                            </a> 
+                            <?php 
+                            } else { ?>
                             <a class="sidebar-menu-button" href="student-all-actions.php?student-id=<?php echo $user_user_id; ?>">
                                 <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">star_half</i>
                                 <span class="sidebar-menu-text">Student</span>
                             </a> 
+                            <?php } ?>
                         </li>
                         <?php } ?>
                         <li class="sidebar-menu-item">

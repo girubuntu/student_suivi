@@ -147,7 +147,7 @@ if (isset($_POST['submit'])) {
                             <div class="row no-gutters">
                                 <div class="col-lg-12 card-form__body card-body">
                                 <?php if(isset($_GET['success'])){ ?>
-                              <div class="alert alert-success alert-dismissable"><button type="button" data-dismiss="alert" aria-hidden="true" class="close">×</button></span><strong>Successfully!</strong> Registered New Student</div>
+                              <div class="alert alert-success alert-dismissable"><button type="button" data-dismiss="alert" aria-hidden="true" class="close">×</button></span><strong>Successfully!</strong> Registered</div>
                               <?php } ?>
                               <?php if(isset($_GET['error'])){ ?>
                               <div class="alert alert-danger alert-dismissable"><button type="button" data-dismiss="alert" aria-hidden="true" class="close">×</button></span><strong>Oops!</strong> Something went wrong, Try again !</div>

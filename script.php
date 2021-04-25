@@ -39,8 +39,6 @@ if($_FILES['excelDoc']['name']) {
                 $SheetUpload = $common->uploadData($conn,$id,$reportId,$quiz,$exam,$total,$createdOn,$updatedOn,$deleted,$course);
         }
         if ($SheetUpload){
-
-
             $queryStudent = "SELECT * FROM student WHERE id = '$studentId' AND deleted != 'yes'";
             $queryStudent = $conn->query($queryStudent);
             $rowStudent = $queryStudent->fetch_assoc(); 
@@ -56,9 +54,9 @@ if($_FILES['excelDoc']['name']) {
             $phone =  $rowParent['phone'];
     
             $data = array(      
-                "sender"=>"$firstName . ' REPORT'",
+                "sender"=>"$firstName",
                 "recipients"=>$phone,
-                "message"=>"$firstName . ' Report is out'",        
+                "message"=>"Dear parent, check out the report is uploaded.",        
             );
         
             $url = "https://www.intouchsms.co.rw/api/sendsms/.json";

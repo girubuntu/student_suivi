@@ -33,11 +33,16 @@
 
     <!-- datatable -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
 
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115115077-4"></script>
+    <script>
+        $(document).ready(function() {
+        $('#example').DataTable();
+        } );
+    </script>
     <script>
         window.dataLayer = window.dataLayer || [];
 
@@ -77,9 +82,6 @@
     <noscript><img height="1" width="1" style="display:none"
             src="https://www.facebook.com/tr?id=340571383230227&amp;ev=PageView&amp;noscript=1" /></noscript>
     <!-- End Facebook Pixel Code -->
-
-
-
 
     <!-- Flatpickr -->
     <link type="text/css" href="assets/css/vendor-flatpickr.css" rel="stylesheet">
@@ -194,10 +196,7 @@
     </div>
     <!-- // END drawer-layout -->
 
-    <script>
-        $(document).ready(function() {
-        $('#example').DataTable();} );
-    </script>
+    
     <!-- jQuery -->
     <script src="assets/vendor/jquery.min.js"></script>
 
@@ -253,8 +252,8 @@
 
     <!-- datatable -->
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
 
 </body>
 

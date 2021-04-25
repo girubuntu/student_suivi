@@ -111,7 +111,27 @@ $reportId = $_GET['report-id'];
                 <div class="page__heading">
                     <div class="container-fluid page__container">
                         <div class="row">
-                            <div class="col col-md-6"><h1 class="mb-0">Marks</h1></div>
+
+                        <?php if($role == 'parent'){
+                                $queryStudent = "SELECT * FROM student WHERE parent_id = '$user_user_id' AND deleted != 'yes'";
+                                $queryStudent = $conn->query($queryStudent);
+                                $rowStudent = $queryStudent->fetch_assoc(); 
+                                $studentId =  $rowStudent['id'];
+                                $firstName = $rowStudent['firstname']; 
+                                $lastname = $rowStudent['lastname'];
+                                ?>
+                                <div class="col col-md-6"><h1 class="mb-0"><?php echo $firstName . ' ' . $lastname ?> Report Marks</h1></div>
+                            <?php } else { 
+                                $queryStudent = "SELECT * FROM student WHERE id = '$user_user_id' AND deleted != 'yes'";
+                                $queryStudent = $conn->query($queryStudent);
+                                $rowStudent = $queryStudent->fetch_assoc();
+                                $studentId =  $rowStudent['id'];
+                                $firstName = $rowStudent['firstname']; 
+                                $lastname = $rowStudent['lastname'];
+                                ?>
+                                <div class="col col-md-6"><h1 class="mb-0"><?php echo $firstName . ' ' . $lastname ?> Report Marks</h1></div>
+                               <?php } ?>
+                            
                             <div class="col col-md-6"><a href="#" class="btn btn-info float-right" onClick="window.print();" >Print</a></div>
                         </div>
                     </div>

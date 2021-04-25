@@ -12,6 +12,19 @@ include("uuid.php");
 
 $studentId = $_GET['student-id'];
 
+$queryStudent = "SELECT * FROM student WHERE id = '$studentId' AND deleted != 'yes'";
+$queryStudent = $conn->query($queryStudent);
+$rowStudent = $queryStudent->fetch_assoc(); 
+$firstName = $rowStudent['firstname'];
+$lastname = $rowStudent['lastname'];
+$parentId =  $rowStudent['parent_id'];
+
+$queryParent = "SELECT * FROM parent WHERE id = '$parentId' AND deleted != 'yes'";
+$queryParent = $conn->query($queryParent);
+$rowParent = $queryParent->fetch_assoc();
+$firstName = $rowParent['firstname'];
+$lastname = $rowParent['lastname'];
+$phone =  $rowParent['phone'];
 
 if (isset($_POST['permission'])) {
 
@@ -22,29 +35,28 @@ if (isset($_POST['permission'])) {
     $endTime = $_POST['endTime'] ;
     $date = date('Y-m-d');
     $uuid = gen_uuid();
-    $receiver = '0788211579';
     
     $query = "INSERT INTO permission(id, student_id, description, start_date, end_date, start_time, end_time, created_on, deleted) VALUES ('$uuid', '$studentId', '$description', '$startDate', '$endDate', '$startTime', '$endTime', '$date', 'no')";
     if($conn->query($query)){
        
-        $queryStudent = "SELECT * FROM student WHERE id = '$studentId' AND deleted != 'yes'";
-        $queryStudent = $conn->query($queryStudent);
-        $rowStudent = $queryStudent->fetch_assoc(); 
-        $firstName = $rowStudent['firstname'];
-        $lastname = $rowStudent['lastname'];
-        $parentId =  $rowStudent['parent_id'];
+        // $queryStudent = "SELECT * FROM student WHERE id = '$studentId' AND deleted != 'yes'";
+        // $queryStudent = $conn->query($queryStudent);
+        // $rowStudent = $queryStudent->fetch_assoc(); 
+        // $firstName = $rowStudent['firstname'];
+        // $lastname = $rowStudent['lastname'];
+        // $parentId =  $rowStudent['parent_id'];
 
-        $queryParent = "SELECT * FROM parent WHERE id = '$parentId' AND deleted != 'yes'";
-        $queryParent = $conn->query($queryParent);
-        $rowParent = $queryParent->fetch_assoc();
-        $firstName = $rowParent['firstname'];
-        $lastname = $rowParent['lastname'];
-        $phone =  $rowParent['phone'];
+        // $queryParent = "SELECT * FROM parent WHERE id = '$parentId' AND deleted != 'yes'";
+        // $queryParent = $conn->query($queryParent);
+        // $rowParent = $queryParent->fetch_assoc();
+        // $firstName = $rowParent['firstname'];
+        // $lastname = $rowParent['lastname'];
+        // $phone =  $rowParent['phone'];
 
         $data = array(      
             "sender"=> $firstName,
             "recipients"=>$phone,
-            "message"=>$description .'\n'. 'From: ' . $startDate . 'To: ' . $endDate,        
+            "message"=>$description .' '. 'From:'. $startDate . ' ' . $startTime . ' To:' . $endDate . ' ' . $endTime,        
         );
     
         $url = "https://www.intouchsms.co.rw/api/sendsms/.json";
@@ -79,7 +91,7 @@ if (isset($_POST['permission'])) {
 
 if (isset($_POST['submit'])) {
 
-    $description=$_POST['comment'];
+    $comment=$_POST['comment'];
     $marks = $_POST['marks'];
     $date = date('Y-m-d');
     $uuid = gen_uuid();
@@ -87,24 +99,30 @@ if (isset($_POST['submit'])) {
     $query = "INSERT INTO disciplinemarks(id, student_id, marks, comment, created_on, deleted) VALUES ('$uuid', '$studentId', '$marks', '$comment', '$date', 'no')";
     if($conn->query($query)){
 
-        $queryStudent = "SELECT * FROM student WHERE id = '$studentId' AND deleted != 'yes'";
-        $queryStudent = $conn->query($queryStudent);
-        $rowStudent = $queryStudent->fetch_assoc(); 
-        $firstName = $rowStudent['firstname'];
-        $lastname = $rowStudent['lastname'];
-        $parentId =  $rowStudent['parent_id'];
+        // $queryStudent = "SELECT * FROM student WHERE id = '$studentId' AND deleted != 'yes'";
+        // $queryStudent = $conn->query($queryStudent);
+        // $rowStudent = $queryStudent->fetch_assoc(); 
+        // $firstName = $rowStudent['firstname'];
+        // $lastname = $rowStudent['lastname'];
+        // $parentId =  $rowStudent['parent_id'];
 
-        $queryParent = "SELECT * FROM parent WHERE id = '$parentId' AND deleted != 'yes'";
-        $queryParent = $conn->query($queryParent);
-        $rowParent = $queryParent->fetch_assoc();
-        $firstName = $rowParent['firstname'];
-        $lastname = $rowParent['lastname'];
-        $phone =  $rowParent['phone'];
+        // $queryParent = "SELECT * FROM parent WHERE id = '$parentId' AND deleted != 'yes'";
+        // $queryParent = $conn->query($queryParent);
+        // $rowParent = $queryParent->fetch_assoc();
+        // $firstName = $rowParent['firstname'];
+        // $lastname = $rowParent['lastname'];
+        // $phone =  $rowParent['phone'];
 
+        // $data = array(      
+        //     "sender"=>"DISCIPLINE",
+        //     "recipients"=>$phone,
+        //     "message"=>$description,        
+        // );
+    
         $data = array(      
-            "sender"=>"DISCIPLINE",
-            "recipients"=>$phone,
-            "message"=>$description,        
+            "sender"=> $firstName,
+            "recipients"=> $phone,
+            "message"=> $comment,    
         );
     
         $url = "https://www.intouchsms.co.rw/api/sendsms/.json";
@@ -131,7 +149,7 @@ if (isset($_POST['submit'])) {
         //close connection
         curl_close($ch);
 
-        header("Location: student-all-actions.php?student-id=$studentId&success");
+        header("Location: student-all-actions.php?student-id=$studentId&success-permission");
     }else {
         header("Location: student-all-actions.php?student-id=$studentId&error");
     }
@@ -243,7 +261,16 @@ if (isset($_POST['submit'])) {
                 <div class="page__heading">
                     <div class="container-fluid page__container">
                         <div class="row">
-                            <div class="col col-md-6"><h1 class="mb-0">Student status</h1></div>
+ 
+                        <?php
+                            $queryStudent = "SELECT * FROM student WHERE id = '$studentId' AND deleted != 'yes'";
+                            $queryStudent = $conn->query($queryStudent);
+                            $rowStudent = $queryStudent->fetch_assoc(); 
+                            $firstName = $rowStudent['firstname'];
+                            $lastname = $rowStudent['lastname'];
+                            $parentId =  $rowStudent['parent_id'];
+                        ?>
+                            <div class="col col-md-6"><h1 class="mb-0"><?php echo $firstName .' '. $lastname; ?> status </h1></div> 
                             <div class="col col-md-6">
                             <?php if($role == 'staff' || $role == 'administrator'){ ?>
                                 <a href="student-list.php" class="text-dark-gray ml-2 float-right">
@@ -323,13 +350,13 @@ if (isset($_POST['submit'])) {
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label >Start time</label>
-                                                    <input name="startTime" type="time" class="form-control" >
+                                                    <input name="startTime" value="<?php date('Y-m-d'); ?>" type="time" class="form-control" >
                                                 </div>
                                             </div>
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label >End time</label>
-                                                    <input name="endTime" type="time" class="form-control" >
+                                                    <input name="endTime" value="<?php date('Y-m-d'); ?>" type="time" class="form-control" >
                                                 </div>
                                             </div>
                                         </div>
@@ -362,8 +389,16 @@ if (isset($_POST['submit'])) {
 										?>
                                             <tr>
                                                 <td><?php echo $row['description']; ?></td>
-                                                <td><?php echo $row['start_date'] . 'at' . $row['start_time']; ?></td>
-                                                <td><?php echo $row['end_date'] . 'at' . $row['end_time']; ?></td>
+                                                <td>
+                                                <?php echo $row['start_date'] . 'at' . $row['start_time'];
+                                                
+                                                 ?>
+                                                </td>
+                                                <td><?php echo $row['end_date'] . 'at' . $row['end_time'];
+                                                
+                                                 ?>
+                                                 
+                                                 </td>
                                             </tr>
                                             <?php } ?>
                                         </tbody>
@@ -463,6 +498,7 @@ if (isset($_POST['submit'])) {
 
                             <div class="row">
                             <?php if($role == 'staff'){ ?>
+                                <?php //echo $studentId; ?>
                                 <div class="col-md-12">
                                     <form action="script.php" method="post" enctype="multipart/form-data">
                                         <div class="row">
