@@ -1,5 +1,5 @@
 <?php
 include("session.php");
 session_destroy(); // Destroying All Sessions
-header("Location: login.php");
+header("Location: home.php");
 ?>

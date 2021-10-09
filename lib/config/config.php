@@ -1,7 +1,7 @@
 <?php
 $server="localhost";
 $user="root";
-$pass="";
+$pass="123456789";
 $db="suivi";
 $conn = new mysqli($server, $user, $pass, $db);
 // Check connection
@@ -9,7 +9,7 @@ if ($conn->connect_error) {
 	die("Connection failed: " . $conn->connect_error);
 }
 function getlocation($id, $location) {
-    $conn = new mysqli('localhost', 'root', '', 'suivi');
+    $conn = new mysqli('localhost', 'root', '123456789', 'suivi');
     //
     $query = "SELECT name FROM $location WHERE id = '$id'";
     $query = $conn->query($query);
