@@ -1,0 +1,18 @@
+this platform helps parents to get information from their student while they are at school 
+mainly student who study in boarding program(highschool)
+
+you may need some initial credentials to access this admin dashboard
+username: admin
+password: admin
+
+only admin create all user and he can view the data 
+
+matron and patron have priviledge to deduct amount of marks to student
+once this action happen the parent receive a notification message.
+
+patron credentials:
+username: egide
+password: admin
+
+username:ange 
+password: admin
