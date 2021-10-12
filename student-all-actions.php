@@ -56,7 +56,7 @@ if (isset($_POST['permission'])) {
         $data = array(      
             "sender"=> $firstName,
             "recipients"=>$phone,
-            "message"=>$description .' '. 'From:'. $startDate . ' ' . $startTime . ' To:' . $endDate . ' ' . $endTime,        
+            "message"=>$description        
         );
     
         $url = "https://www.intouchsms.co.rw/api/sendsms/.json";
